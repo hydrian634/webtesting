@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Detail - QanTum</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .navbar {
+        background: #1a1a1a;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 98px;
+      }
+
+      .navbar-brand {
+        font-size: 36px;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      .nav-items {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-items a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .menu-bar {
+        background: #2a2a2a;
+        padding: 0 40px;
+        display: flex;
+        gap: 80px;
+        height: 98px;
+        align-items: center;
+      }
+
+      .menu-bar a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .container {
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 40px;
+      }
+
+      .breadcrumb {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 40px;
+      }
+
+      .breadcrumb a {
+        color: #667eea;
+        text-decoration: none;
+      }
+
+      .content-wrapper {
+        display: flex;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      .product-images {
+        flex: 1;
+      }
+
+      .main-image {
+        width: 100%;
+        height: 600px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .thumbnail-images {
+        display: flex;
+        gap: 10px;
+      }
+
+      .thumbnail {
+        width: 100px;
+        height: 100px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 4px;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+
+      .thumbnail:hover,
+      .thumbnail.active {
+        border-color: #667eea;
+      }
+
+      .product-details {
+        flex: 1;
+      }
+
+      .product-title {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .product-price {
+        font-size: 32px;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 30px;
+      }
+
+      .product-description {
+        font-size: 16px;
+        line-height: 1.8;
+        color: #666;
+        margin-bottom: 40px;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 30px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 40px;
+      }
+
+      .tab-button {
+        padding: 10px 0;
+        border: none;
+        background: none;
+        font-size: 16px;
+        font-weight: 600;
+        color: #666;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s;
+      }
+
+      .tab-button.active {
+        color: #667eea;
+        border-bottom-color: #667eea;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .add-to-cart-btn {
+        padding: 15px 40px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+        width: 100%;
+      }
+
+      .add-to-cart-btn:hover {
+        background: #5568d3;
+      }
+
+      .footer {
+        background: #1a1a1a;
+        color: white;
+        padding: 40px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-brand">QanTum</a>
+      <div class="nav-items">
+        <a href="/signin">Sign in/up</a>
+        <a href="/">My Account</a>
+      </div>
+    </nav>
+
+    <div class="menu-bar">
+      <a href="/products">Products</a>
+      <a href="/software">Software</a>
+      <a href="/support">Support</a>
+    </div>
+
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/products">Products</a> >
+        <span th:text="${product.name}"></span>
+      </div>
+
+      <div class="content-wrapper">
+        <div class="product-images">
+          <div class="main-image" th:text="${product.name}"></div>
+          <div class="thumbnail-images">
+            <div class="thumbnail active"></div>
+            <div class="thumbnail"></div>
+            <div class="thumbnail"></div>
+          </div>
+        </div>
+
+        <div class="product-details">
+          <h1 class="product-title" th:text="${product.name}"></h1>
+          <div
+            class="product-price"
+            th:text="'₩ ' + ${#numbers.formatInteger(product.price, 0)}"
+          ></div>
+
+          <p class="product-description" th:text="${product.description}"></p>
+
+          <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('index')">
+              Index
+            </button>
+            <button class="tab-button" onclick="switchTab('specs')">
+              Tech Specs
+            </button>
+            <button class="tab-button" onclick="switchTab('downloads')">
+              Downloads
+            </button>
+            <button class="tab-button" onclick="switchTab('package')">
+              Package Contents
+            </button>
+          </div>
+
+          <div id="index" class="tab-content active">
+            <p>Product information and overview</p>
+          </div>
+          <div id="specs" class="tab-content">
+            <p>Technical specifications for this product</p>
+          </div>
+          <div id="downloads" class="tab-content">
+            <p>Available downloads and resources</p>
+          </div>
+          <div id="package" class="tab-content">
+            <p>What's included in the package</p>
+          </div>
+
+          <button class="add-to-cart-btn">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>
+        © 2026 skyaliqo0206. All rights reserved. Logo created by ChatGPT AI.
+      </p>
+    </footer>
+
+    <script>
+      function switchTab(tabName) {
+        // Hide all tabs
+        document.querySelectorAll(".tab-content").forEach((tab) => {
+          tab.classList.remove("active");
+        });
+        document.querySelectorAll(".tab-button").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Show selected tab
+        document.getElementById(tabName).classList.add("active");
+        event.target.classList.add("active");
+      }
+    </script>
+  </body>
+</html>

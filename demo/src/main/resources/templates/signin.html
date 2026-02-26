@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In - QanTum</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Roboto",
+          "Open Sans",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .container {
+        display: flex;
+        width: 100%;
+        max-width: 1400px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .signin-left {
+        flex: 1;
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .signin-right {
+        flex: 1;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+      }
+
+      .logo {
+        font-size: 48px;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 40px;
+      }
+
+      .form-group {
+        margin-bottom: 30px;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #333;
+        font-size: 14px;
+      }
+
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+      }
+
+      input[type="email"]:focus,
+      input[type="password"]:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .error {
+        color: #dc3545;
+        font-size: 13px;
+        margin-top: 5px;
+      }
+
+      .signin-btn {
+        width: 100%;
+        padding: 12px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .signin-btn:hover {
+        background: #5568d3;
+      }
+
+      .divider {
+        text-align: center;
+        margin: 30px 0;
+        position: relative;
+      }
+
+      .divider::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        right: 0;
+        height: 1px;
+        background: #ddd;
+      }
+
+      .divider span {
+        background: white;
+        padding: 0 15px;
+        color: #999;
+        font-size: 13px;
+        position: relative;
+      }
+
+      .social-login {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 30px;
+      }
+
+      .social-btn {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        background: white;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s;
+      }
+
+      .social-btn:hover {
+        background: #f5f5f5;
+        border-color: #999;
+      }
+
+      .links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
+        font-size: 14px;
+      }
+
+      .links a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .links a:hover {
+        text-decoration: underline;
+      }
+
+      .signup-link {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+      }
+
+      .signup-link a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .signin-right h2 {
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .signin-right p {
+        font-size: 18px;
+        opacity: 0.9;
+        text-align: center;
+        line-height: 1.6;
+      }
+
+      .alert {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+        }
+
+        .signin-left,
+        .signin-right {
+          padding: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="signin-left">
+        <div class="logo">QanTum</div>
+
+        <form th:action="@{/signin}" method="POST" th:object="${loginRequest}">
+          <div
+            th:if="${#fields.hasErrors('global')}"
+            class="alert alert-danger error"
+          >
+            <div
+              th:each="err : ${#fields.errors('global')}"
+              th:text="${err}"
+            ></div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">이메일 주소</label>
+            <input
+              type="email"
+              id="email"
+              th:field="*{email}"
+              placeholder="your@email.com"
+              required
+            />
+            <div
+              th:if="${#fields.hasErrors('email')}"
+              class="error"
+              th:errors="*{email}"
+            ></div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input
+              type="password"
+              id="password"
+              th:field="*{password}"
+              placeholder="Enter password"
+              required
+            />
+            <div
+              th:if="${#fields.hasErrors('password')}"
+              class="error"
+              th:errors="*{password}"
+            ></div>
+          </div>
+
+          <button type="submit" class="signin-btn">로그인</button>
+        </form>
+
+        <div class="divider"><span>또는</span></div>
+
+        <div class="social-login">
+          <button class="social-btn">K</button>
+          <button class="social-btn">G</button>
+        </div>
+
+        <div class="links">
+          <a href="/signup">회원가입</a>
+          <a href="#">이메일 찾기</a>
+          <a href="#">비밀번호 찾기</a>
+        </div>
+
+        <div class="signup-link">
+          계정이 없으신가요? <a href="/signup">회원가입</a>
+        </div>
+      </div>
+
+      <div class="signin-right">
+        <h2>Welcome Back</h2>
+        <p>
+          Sign in to your account to continue shopping and manage your orders
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

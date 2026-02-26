@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support - QanTum</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .navbar {
+        background: #1a1a1a;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 98px;
+      }
+
+      .navbar-brand {
+        font-size: 36px;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      .nav-items {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-items a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .menu-bar {
+        background: #2a2a2a;
+        padding: 0 40px;
+        display: flex;
+        gap: 80px;
+        height: 98px;
+        align-items: center;
+      }
+
+      .menu-bar a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .container {
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 40px;
+      }
+
+      .page-title {
+        font-size: 64px;
+        font-weight: 700;
+        margin-bottom: 60px;
+        text-align: center;
+        color: #333;
+      }
+
+      .support-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+      }
+
+      .support-card {
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+      }
+
+      .support-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        transform: translateY(-4px);
+      }
+
+      .support-card h3 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #667eea;
+      }
+
+      .support-card p {
+        font-size: 16px;
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .support-card a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: background 0.3s;
+      }
+
+      .support-card a:hover {
+        background: #5568d3;
+      }
+
+      .faq-section {
+        background: white;
+        padding: 40px;
+        border-radius: 8px;
+        margin-bottom: 60px;
+      }
+
+      .faq-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .faq-item {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-left: 4px solid #667eea;
+        background: #f9f9f9;
+        border-radius: 4px;
+      }
+
+      .faq-question {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .faq-answer {
+        font-size: 14px;
+        color: #666;
+        margin-top: 10px;
+        display: none;
+      }
+
+      .faq-answer.show {
+        display: block;
+      }
+
+      .footer {
+        background: #1a1a1a;
+        color: white;
+        padding: 40px;
+        text-align: center;
+        margin-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-brand">QanTum</a>
+      <div class="nav-items">
+        <a href="/signin">Sign in/up</a>
+        <a href="/">My Account</a>
+      </div>
+    </nav>
+
+    <div class="menu-bar">
+      <a href="/products">Products</a>
+      <a href="/software">Software</a>
+      <a href="/support">Support</a>
+    </div>
+
+    <div class="container">
+      <h1 class="page-title">Support</h1>
+
+      <div class="support-grid">
+        <div class="support-card">
+          <h3>FAQs</h3>
+          <p>
+            Find answers to common questions about our products and services
+          </p>
+          <a href="#">Visit FAQs</a>
+        </div>
+        <div class="support-card">
+          <h3>Order Status</h3>
+          <p>Track your orders and check delivery status in real-time</p>
+          <a href="#">Check Status</a>
+        </div>
+        <div class="support-card">
+          <h3>Customer Service</h3>
+          <p>Contact our support team for assistance with your inquiries</p>
+          <a href="#">Contact Us</a>
+        </div>
+      </div>
+
+      <div class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How do I track my order?</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            You can track your order by visiting our Order Status page and
+            entering your order number.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What is your return policy?</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            We offer a 30-day return policy for most items. Please contact our
+            customer service for details.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>How long does shipping take?</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Standard shipping usually takes 5-7 business days. Express shipping
+            is available for faster delivery.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Do you offer international shipping?</span>
+            <span>+</span>
+          </div>
+          <div class="faq-answer">
+            Yes, we ship to most countries worldwide. Shipping costs and times
+            vary by location.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>
+        © 2026 skyaliqo0206. All rights reserved. Logo created by ChatGPT AI.
+      </p>
+    </footer>
+
+    <script>
+      function toggleFaq(element) {
+        const answer = element.nextElementSibling;
+        answer.classList.toggle("show");
+        const icon = element.querySelector("span:last-child");
+        icon.textContent = answer.classList.contains("show") ? "−" : "+";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Software - QanTum</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f5f5f5;
+        color: #333;
+      }
+
+      .navbar {
+        background: #1a1a1a;
+        padding: 0 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 98px;
+      }
+
+      .navbar-brand {
+        font-size: 36px;
+        font-weight: 700;
+        color: white;
+        text-decoration: none;
+      }
+
+      .nav-items {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-items a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .menu-bar {
+        background: #2a2a2a;
+        padding: 0 40px;
+        display: flex;
+        gap: 80px;
+        height: 98px;
+        align-items: center;
+      }
+
+      .menu-bar a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .container {
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 40px;
+      }
+
+      .page-title {
+        font-size: 64px;
+        font-weight: 700;
+        margin-bottom: 40px;
+        text-align: center;
+        color: #333;
+      }
+
+      .search-box {
+        max-width: 600px;
+        margin: 0 auto 40px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .search-box input {
+        flex: 1;
+        padding: 15px 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      .search-box button {
+        padding: 15px 30px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .categories {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+      }
+
+      .category-item {
+        text-align: center;
+      }
+
+      .category-item a {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #667eea;
+        text-decoration: none;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid transparent;
+        transition: all 0.3s;
+      }
+
+      .category-item a:hover {
+        color: #5568d3;
+        border-bottom-color: #667eea;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .product-card {
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .product-image {
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+
+      .product-info {
+        font-size: 14px;
+        color: #666;
+      }
+
+      .footer {
+        background: #1a1a1a;
+        color: white;
+        padding: 40px;
+        text-align: center;
+        margin-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="/" class="navbar-brand">QanTum</a>
+      <div class="nav-items">
+        <a href="/signin">Sign in/up</a>
+        <a href="/">My Account</a>
+      </div>
+    </nav>
+
+    <div class="menu-bar">
+      <a href="/products">Products</a>
+      <a href="/software">Software</a>
+      <a href="/support">Support</a>
+    </div>
+
+    <div class="container">
+      <h1 class="page-title">Software</h1>
+
+      <div class="search-box">
+        <input
+          type="text"
+          placeholder="Search your products of enterprise or company"
+        />
+        <button>Search</button>
+      </div>
+
+      <div class="categories">
+        <div class="category-item">
+          <a href="#">Enterprise</a>
+          <div style="color: #999">Corsair, LogiTech, Razor</div>
+        </div>
+        <div class="category-item">
+          <a href="#">Gaming Gear</a>
+          <div style="color: #999">Popular products</div>
+        </div>
+        <div class="category-item">
+          <a href="#">Popular Topics</a>
+          <div style="color: #999">FAQs, Order Status</div>
+        </div>
+        <div class="category-item">
+          <a href="#">Articles</a>
+          <div style="color: #999">Customer Service</div>
+        </div>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">Corsair</div>
+          <div class="product-info">Professional Grade</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">LogiTech</div>
+          <div class="product-info">Quality Products</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">Razor</div>
+          <div class="product-info">Gaming Peripherals</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">Headsets</div>
+          <div class="product-info">Audio Solutions</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">Keyboards</div>
+          <div class="product-info">Input Devices</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">Mouse</div>
+          <div class="product-info">Precision Pointing</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">Mouse Pad</div>
+          <div class="product-info">Surface Control</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">FAQs</div>
+          <div class="product-info">Common Questions</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">Order Status</div>
+          <div class="product-info">Track Orders</div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">Customer Service</div>
+          <div class="product-info">Support Team</div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>
+        © 2026 skyaliqo0206. All rights reserved. Logo created by ChatGPT AI.
+      </p>
+    </footer>
+  </body>
+</html>
